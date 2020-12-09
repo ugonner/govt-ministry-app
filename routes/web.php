@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home2');
+    //echo $_SERVER['SERVER_NAME'];
+    //$page = file_get_contents('http://'.$_SERVER['SERVER_NAME'].'/api/resources/views/home2.php');
+    //echo $page;
+    //include_once $_SERVER['DOCUMENT_ROOT'].'\..\resources\views\home2.php'; exit;
 });
 
 Auth::routes();

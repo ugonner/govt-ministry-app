@@ -7,6 +7,27 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!--from template-->
+
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Dental Pro Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <link href="{{asset('myassets/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{asset('myassets/css/swipebox.css')}}">
+    <link href="{{asset('myassets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <!-- font-awesome icons -->
+    <link href="{{asset('myassets/css/font-awesome.css')}}" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <link href="//fonts.googleapis.com/css?family=Pathway+Gothic+One" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+
+    <!--end form template-->
+    
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!--for md bootstrap-->
@@ -39,10 +60,25 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!--from dlc template-->
+
+    <!-- Owl carousel -->
+    <link rel="stylesheet" href="{{asset('myassets2/assets/css/owl.carousel.css') }}">
+
+    <!-- Template main Css -->
+    <link rel="stylesheet" href="{{asset('myassets2/assets/css/style.css') }}">
+
+    <!-- Modernizr -->
+    <script src="{{asset('myassets2/assets/js/modernizr-2.6.2.min.js') }}"></script>
+
+    <!--end form dlc-->
+
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+
+        <!--<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -92,7 +128,7 @@
                 </div>
             </div>
         </nav>
-
+-->
         <main class="py-4">
             @yield('content')
         </main>
