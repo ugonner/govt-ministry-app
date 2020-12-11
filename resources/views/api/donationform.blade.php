@@ -1,32 +1,3 @@
-@extends('layouts.admin')
-
-@section('content')
-
-<div class="container">
-<div class="row">
-<div class="col-sm-2"></div>
-<div class="col-sm-8">
-
-<div class="row">
-
-    @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
-
-    @if ($message = Session::get('output'))
-    <div class="alert alert-success">
-        <strong>{{ $message }}</strong>
-    </div>
-    @endif
-
-</div>
 
 <div class="row">
 
@@ -226,7 +197,7 @@
     <h2>Make Your Donation, We Deeply Appreciate Your Benevolence (Step 5 of 5)</h2>
     <div class="row">
         <div class="col-sm-12" id="imageurldiv">
-            
+
         </div>
     </div>
 
@@ -275,57 +246,3 @@
 </form>
 </div>
 </div>
-</div>
-<div class="col-sm-2">
-
-</div>
-</div>
-
-</div>
-
-<script type="text/javascript">
-
-
-    $(document).ready(function() {
-
-        $(function() {
-            // Multiple images preview with JavaScript
-            var multiImgPreview = function(input, imgPreviewPlaceholder) {
-
-                if (input.files) {
-                    var filesAmount = input.files.length;
-
-                    for (i = 0; i < filesAmount; i++) {
-                        var reader = new FileReader();
-
-                        reader.onload = function(organization) {
-                            //create ie parseHTML img element within jquery selector $(''), add srt attr,
-                            //and append to the named element
-                            $($.parseHTML('<img src="" class="img-fluid w-25">')).attr('src', organization.target.result).appendTo(imgPreviewPlaceholder);
-                        }
-
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-
-            };
-
-
-            $('#imageurl').on('change', function() {
-                multiImgPreview(this, 'div#imageurldiv');
-            });
-        });
-
-
-
-        // Material Select Initialization
-        $('.mdb-select').materialSelect();
-    });
-</script>
-<script type="text/javascript">
-    // Material Select Initialization
-    $(document).ready(function() {
-        $('.mdb-select').materialSelect();
-    });
-</script>
-@endsection

@@ -1,11 +1,4 @@
 
-
-<!--
-author: W3layouts
-author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +69,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                 <div class="col-xs-10" style="padding: 24px 10px 24px 5px;">
                     <h2 class="font-weight-bold">DLEEP</h2>
-                    <h5 class="font-weight-bolder">Disability Law Enactment and Enforcement Promotion</h5>
+                    <h5 class="font-weight-bolder"> Disability Law Enactment and Enforcement Promotion </h5>
                 </div>
             </div>
         <!--</div>
@@ -94,9 +87,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <li><a class="text-wrap btn btn-danger btn-lg btn-block" data-toggle="tab" href="#dleep-menu-pane-2">What We Do</a></li>
                 <li><a class="text-wrap btn btn-danger btn-lg btn-block" data-toggle="tab" href="#dleep-menu-pane-3">History</a></li>
                 <li><a class="text-wrap btn btn-danger btn-lg btn-block" data-toggle="tab" href="#dleep-menu-pane-4">Resources</a></li>
+                <li><a class="text-wrap btn btn-danger btn-lg btn-block" data-toggle="tab" href="#dleep-menu-pane-5">Donate</a></li>
 
             </ul>
         </div>
+
         <div class="col-xs-12 bg-gray">
             <div>
                 <div class="tab-content">
@@ -123,6 +118,297 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <p class="bg-dark-gray text-light" style="padding: 16px 16px 16px 1px;">
                             You are here welcome to DLEEP, Disability law enactment and enforcement promotion
                         </p>
+                    </div>
+
+                    <div style="min-height: 200px; padding: 32px;" class="tab-pane bg-dark animated slideInLeft" id="dleep-menu-pane-5">
+                        <h2 class="p-5 text-danger font-weight-bolder">DONATE</h2>
+                        <p class="bg-dark-gray text-light" style="padding: 16px 16px 16px 1px;">
+                            Donate to DLEEP, Disability law enactment and enforcement promotion
+                        </p>
+                        <h4 class="">
+                            <button class="btn btn-danger btn-lg" type="button" data-toggle="collapse" data-target="#dleep-donation-modal">Donate</button>
+                        </h4>
+
+
+
+                        <div class="row">
+                            <div class="col-xs-4"></div>
+                            <div class="col-xs-6">
+
+
+                            <!--donation modal-->
+
+                            <div class="collapse text-light" id="dleep-donation-modal">
+
+                            <div class="row">
+
+
+                            <div class="form-group">
+                            <form method="POST" action="{{ route('createdonation') }}" enctype="multipart/form-data">
+                            @csrf
+
+                            <div id="demo" class="carousel slide" data-interval="false"  data-ride="carousel">
+
+                            <!-- The slideshow -->
+                            <div class="carousel-inner">
+                            <div class="carousel-item item active">
+
+                                <h2 class="text-capitalize">Add Donation Info , Please We'd Appreciate A Brief About Your Donation</h2>
+
+
+                                <h2 class="text-center text-light" style="padding: 16px;">
+                                    <span class="fa fa-credit-card"  style="font-size: 3em;"></span>
+                                </h2>
+
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="focalareaid" class="col-form-label text-md-right">{{ __('donation peculiar focalarea') }}</label>
+                                        <select id="focalareaid" class="input-lg form-control input-lg @error('focalareaid') is-invalid @enderror" name="focalareaid" required>
+                                            <option value="0">Please Select A Focalarea</option>
+                                            @foreach ($focalareas as $focalarea)
+                                            <option value="{{$focalarea->id}}" @if  (old('focalareaid') == $focalarea->id) selected @endif>{{$focalarea->name}}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('focalareaid')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+
+                                        <div class="form-group col-sm-6">
+                                            <label for="amount" class="col-form-label text-md-right">{{ __('Amount') }}</label>
+                                            <input id="amount" type="number"  name="amount" value="{{ old("amount")}}" placeholder="0.00" class="input-lg form-control input-lg @error("amount") is-invalid @enderror" required autocomplete="amount" autofocus>
+
+                                            @error("amount")
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+
+
+
+
+                                </div>
+
+                                <div class="row" hidden="hidden">
+                                    <div class="form-group col-sm-12">
+                                        <label for="redeemed" class="col-form-label text-md-right">{{ __('Donation Status') }}</label>
+                                        <select  id="redeemed" class="form-control input-lg @error('redeemed') is-invalid @enderror" name="redeemed" required>
+                                            <!--<option value="N">Not Yet</option>
+                                            -->
+                                            <option value="Y">Redeemed</option>
+                                        </select>
+
+                                        @error('redeemed')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <label for="description">Reason For Donation</label>
+                                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" style="height: 100px;">{{old('description','description of donation')}}</textarea>
+
+
+                                        @error('description')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
+                                <!-- Left and right controls -->
+                                <div class="row">
+                                    <div class="col-xs-4 text-left">
+                                        <a class="carousel-control" href="#demo" data-slide="prev">
+                                            <span class="glyphicon glyphicon-circle-arrow-left"></span>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <button class="btn btn-lg btn-info rounded-pill" data-target="#demo" data-slide-to="1">Continue <span class=" material-icons">east</span></button>
+                                    </div>
+                                    <div class="col-xs-4 text-right">
+                                        <a class="carousel-control" href="#demo" data-slide="next">
+                                            <span class="glyphicon glyphicon-arrow-right"></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="carousel-item item">
+
+
+                                <h2>Basic Information on Donor: Contact is important </h2>
+
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="name" class="col-form-label text-md-right">{{ __('Donor Name') }}</label>
+                                        <input id="name" type="text"  name="name" value="{{ old('name')}}" placeholder="Mr. Ugonna Ume" class="input-lg form-control input-lg @error('name') is-invalid @enderror" required autocomplete="name" autofocus>
+
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-sm-6">
+                                        <label for="email" class="col-form-label text-md-right">{{ __('Email') }}</label>
+                                        <input id="email" type="text" placeholder="abc@email.com" class="form-control input-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="form-group col-sm-6">
+                                        <label for="password" class="col-form-label text-md-right">{{ __('Password') }}</label>
+                                        <input id="password" type="password"  name="password" value="{{ old("password")}}" placeholder="Eg ASA-USA" class="form-control input-lg @error("password") is-invalid @enderror" required autocomplete="password" autofocus>
+
+                                        @error("password")
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-sm-6">
+                                        <label for="password_confirmation" class="col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                        <input id="password_confirmation" type="password"  class="form-control input-lg @error("password_confirmation") is-invalid @enderror" name="password_confirmation" value="{{ old("password_confirmation") }}" required autocomplete="password_confirmation">
+
+                                        @error("password_confirmation")
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <label for="mobile" class="col-form-label text-md-right">{{ __('Mobile Number') }}</label>
+                                        <input id="mobile" type="tel"  name="mobile" value="{{ old("mobile")}}" placeholder="07034667861" class="form-control input-lg @error("mobile") is-invalid @enderror" required autocomplete="mobile" autofocus>
+
+                                        @error("mobile")
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Left and right controls -->
+                                <div class="form-row">
+                                    <div class="col-xs-4 text-left">
+                                        <a class="" href="#demo" data-slide="prev">
+                                            <span class="glyphicon glyphicon-arrow-left"></span>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <button class="btn btn-lg btn-info rounded-pill" data-target="#demo" data-slide-to="2">Continue <span class=" material-icons">east</span></button>
+                                    </div>
+                                    <div class="col-xs-4 text-right">
+                                        <a class="carousel-control" href="#demo" data-slide="next">
+                                            <span class="glyphicon glyphicon-arrow-right"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="carousel-item item">
+                                <h2>Make Your Donation, We Deeply Appreciate Your Benevolence (Step 3 of 3)</h2>
+                                <div class="row">
+                                    <div class="col-sm-12" id="imageurldiv">
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="form-group custom-file">
+
+                                        <label for="imageurl" class="custom-file-label">{{ __('Add A Profile Picture / Logo To Identify Donor')}}</label>
+                                        <h2 class="text-center text-light" >
+                                            <span class="fa fa-image"  onclick="displayFilePicker()" style="font-size: 3em;"></span>
+                                        </h2>
+                                        <input style="display: none;" type="file" name="imageurl" class="custom-file-input @error('imageurl') is-invalid @enderror " id="dleep-donation-file-input">
+
+
+                                        <script type="text/javascript">
+                                            function displayFilePicker(){
+                                                var dleep_imagePicker = document.getElementById('dleep-donation-file-input').click();
+                                                dleep_imagePicker.click();
+                                            }
+                                        </script>
+                                    </div>
+                                    @error('imageurl')
+                                        <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+
+                                <!-- Left and right controls -->
+                                <div class="row">
+                                    <div class="col-xs-4 text-left">
+                                        <a class="text-light" href="#demo" data-slide="prev">
+                                            <span class="glyphicon glyphicon-arrow-left"></span>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <button type="submit" class="rounded-pill input-lg btn btn-primary btn-lg">
+                                            {{ __('Donate') }}
+                                        </button>
+
+                                    </div>
+                                    <div class="col-xs-4 text-right">
+                                        <a class="" href="#demo" data-slide="next">
+                                            <span class="glyphicon glyphicon-arrow-right"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            </div>
+
+
+                            </div>
+
+                            <div class="form-group row">
+
+                            </div>
+                            </form>
+                            </div>
+                            </div>
+                            </div>
+
+                            <!--end donation modal-->
+
+                            </div>
+                            <div class="col-xs-2"></div>
+                        </div>
                     </div>
 
                 </div>
@@ -190,10 +476,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="carousel-caption">
 
                     <h2 class="carousel-title bounceInDown animated slow">
-                        DLEEP provides legal advocacy for the protection of the rights of PWDs
+                        DLEEP provides consultative and support services on the enactment and implementation fo the disability rights law
                     </h2>
                     <h4 class="carousel-subtitle bounceInUp animated slow ">
-                        DLEEP cares... Let's help you
+                        DLEEP cares... Let's help you get there
                     </h4>
                     <a href="#" class="btn btn-lg btn-secondary hidden-xs bounceInUp animated slow" data-toggle="modal" data-target="#donateModal">
                         Know More
@@ -215,7 +501,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="carousel-caption">
 
                     <h2 class="carousel-title bounceInDown animated slow">
-                        DLEEP colloborates with government and agencies in policies affecting PWDs
+                        DLEEP colloborates with government and agencies in policies affecting PWDs with focus on the disability rights law.
                     </h2>
                     <h4 class="carousel-subtitle bounceInUp animated slow">
                         So let's do it !
@@ -242,7 +528,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="carousel-caption">
 
                     <h2 class="carousel-title bounceInDown animated slow" >
-                        DLEEP invests in human development services for PWDs.
+                        DLEEP provides legal advocacy for the protection of the rights of PWDs
                     </h2>
                     <h4 class="carousel-subtitle bounceInUp animated slow">
                         You can make the diffrence !
@@ -280,8 +566,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<i class="fa fa-phone" aria-hidden="true"></i>
 						</div>
 						<div class="col-xs-10 about-grid2-right">
-							<h4>2460 49980 88</h4>
-							<p>6692 Jasmin Street, NY 44060</p>
+							<h4>0703 466 7861 </h4>
+							<p>Prof Dora Akunyili Women Development Center, Enugu - Onitsha Express Way, Awka. Anambra State</p>
 						</div>
 						<div class="clearfix"></div>
 
@@ -306,7 +592,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</div>
 						<div class="col-xs-10 about-grid2-right">
 							<h4>Open Hours</h4>
-							<p>Mon – Sat: 10 am – 7 pm, Sun :10am - 1pm </p>
+							<p>Mon – Fri: 8 am – 4 pm, Sat & Sun On Emergency Priority</p>
 						</div>
 						<div class="clearfix"></div>
 
@@ -317,31 +603,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- about -->
 	<div class="about" id="about">
 		<div class="container">
-					<h3 class="w3l_head">Step by step Procedure</h3>
+					<h3 class="w3l_head">What is DLEEP <span class="glyphicon glyphicon-question-sign"></span> </h3>
 			          <p class="w3ls_head_para">A few words about us</p>
 						<div class="w3l-grids-about">
-								<div class="col-md-5 w3ls-ab-right">
-									<div class="agile-about-right-img">
-										<form action="#" method="post">
-											<p>User Name </p>
-											<input type="text" name="Name"  required=""/>
-											<p>User Email </p>
-											<input type="text" name="Email"  required=""/>
-											<p>User Phone </p>
-											<input type="text" name="Phone"  required=""/>
-											<p>User Password</p>
-											<input type="password" name="Password" placeholder="" required=""/>
-
-										<p>User Date </p>
-											<input type="date" name="date"  required=""/>
-											<input type="submit" value="Book An Appointment">
-										</form>
-									</div>
-								</div>
 								<div class="col-md-7 w3ls-agile-left">
-									<h2> Get your free consultation </h2>
-									<h4>Book An Appointment</h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisc elit. Proin ultricies vestibulum velit.Lorem ipsum dolor sit amet.Nam aliquam pretium feugiat. Duis sem est, viverra eu interdum ac, suscipit nec mauris. Suspendisse commodo tempor sagittis,Lorem ipsum dolor sit amet, consectetur adipisc elit. Proin ultricies vestibulum velit.Lorem ipsum dolor sit amet.Nam aliquam pretium feugiat</p>
+									<h2> What you can say About DLEEP </h2>
+									<h4>The dleep, (disability law enactment and enforcement promotion)</h4>
+									<p>
+                                        This ia an organ that champions in totality, the Disability Rights Law. It provides expertise and consultancy
+                                        in the formulation, drafting the letters of the law, follows, tracks or advices on activities and programs around the legislative stage of the law and
+                                        pursues the enactment and implementation of the law for any government and society.
+                                    </p>
 
 										<a href="#" data-toggle="modal" data-target="#myModal1" class="read">Read More</a>
 										<!-- Modal1 -->
@@ -361,6 +633,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 													<!-- //Modal1 -->
 
 								</div>
+                            <div class="col-md-5 w3ls-ab-right">
+                                <div class="agile-about-right-img">
+                                    <p>You can as well book for further relations from DLEEP here</p>
+                                    <form action="#" method="post">
+                                        <p>User Name </p>
+                                        <input type="text" name="Name"  required=""/>
+                                        <p>User Email </p>
+                                        <input type="text" name="Email"  required=""/>
+                                        <p>User Phone </p>
+                                        <input type="text" name="Phone"  required=""/>
+                                        <p>User Password</p>
+                                        <input type="password" name="Password" placeholder="" required=""/>
+
+                                        <p>User Date </p>
+                                        <input type="date" name="date"  required=""/>
+                                        <input type="submit" value="Book An Appointment">
+                                    </form>
+                                </div>
+                            </div>
 								<div class="clearfix"> </div>
 			 				</div>
 			   </div>
@@ -369,35 +660,34 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			   <div class="offer-section">
 				<div class="col-md-3 spa-grid">
 
-						<i class="fa fa-medkit" aria-hidden="true"></i>
+                        <i class="fa fa-pencil-square" aria-hidden="true" style="font-size: 3em;"></i>
 
-						<h4>Metal braces </h4>
+						<h4>Disability Law Formulation and Drafting </h4>
 
 				</div>
 				<div class="col-md-3 spa-grid">
 
-						<i class="fa fa-wheelchair" aria-hidden="true"></i>
+                    <i class="fa fa-gavel" aria-hidden="true" style="font-size: 3em;"></i>
 
 
-						<h4>Implantology</h4>
-
-
-				</div>
-				<div class="col-md-3 spa-grid lost">
-
-						<i class="fa fa-stethoscope" aria-hidden="true"></i>
-
-
-						<h4> Artificial Teeth</h4>
+						<h4>Legislative supports</h4>
 
 
 				</div>
 				<div class="col-md-3 spa-grid lost">
 
-					<i class="fa fa-user-md" aria-hidden="true"></i>
+                    <i class="fa fa-file-archive-o" aria-hidden="true" style="font-size: 3em;"></i>
 
 
-						<h4>Procedure to teeth</h4>
+						<h4> Facilitation of Assent and Enactment </h4>
+
+
+				</div>
+				<div class="col-md-3 spa-grid lost">
+
+                    <i class="fa fa-power-off" aria-hidden="true" style="font-size: 3em;"></i>
+
+						<h4>Powering on the Implementation</h4>
 
 
 				</div>
@@ -409,25 +699,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- /property-grids -->
 <div class="property-grids">
      <div class="agile-homes-w3l  grid">
-                <div class="col-md-6 home-agile-left">
-				  <div class="video-grid-single-page-agileits">
-														<div data-video="qvRoq9ToKhw" id="video"> <img src="{{ asset('myassets/images/a11.jpg') }}" alt="" class="img-responsive" /> </div>
-													</div>
-
-
-						</div>
-				 <div class="col-md-6 home-agile-left">
-						 <figure class="effect-moses">
-							<img src="{{ asset('myassets/images/a2.jpg') }}" alt="" />
-							<figcaption>
-								<h4>DLEEP Project</h4>
-								<p>Helping You Stay Happy One</p>
-							</figcaption>
-				</figure>
-				</div>
-				<div class="clearfix"></div>
-     </div>
+        <div class="col-md-6 home-agile-left">
+		   <div class="video-grid-single-page-agileits">
+		      <div data-video="qvRoq9ToKhw" id="video"> <img src="{{ asset('myassets/images/a11.jpg') }}" alt="" class="img-responsive" /> </div>
+		   </div>
+     	</div>
+	 <div class="col-md-6 home-agile-left">
+	     <figure class="effect-moses">
+			<img src="{{ asset('myassets/images/a2.jpg') }}" alt="" />
+		    	<figcaption>
+					<h4>DLEEP Project</h4>
+			    	<p>Helping You Institute the Law with ease</p>
+				</figcaption>
+		 </figure>
+	</div>
+	<div class="clearfix"></div>
+    </div>
 </div>
+
 <!-- //property-grids -->
 	<!-- /services -->
 <!-- choose-us -->
@@ -439,36 +728,36 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="col-md-4 agileits-w3layouts-grid">
 					<div class="wthree_agile_us">
 						<div class="col-xs-9 agile-why-text">
-							<h4>Cleanings</h4>
-							<p>Lorem ipsum magna, vehicula ut scelerisque ornare porta ete.</p>
+							<h4>Lettering / Drafts</h4>
+							<p>DLEEP provides expertise and experience in putting the disability rights law to words</p>
 						</div>
 						<div class="col-xs-3 agile-why-text">
 							<div class="wthree_features_grid hvr-rectangle-out">
-								<i class="fa fa-hospital-o" aria-hidden="true"></i>
+								<i class="fa fa-pencil" aria-hidden="true"></i>
 							</div>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
 					<div class="wthree_agile_us">
 						<div class="col-xs-9 agile-why-text">
-							<h4>Crowns & Bridges</h4>
-							<p>Lorem ipsum magna, vehicula ut scelerisque ornare porta ete.</p>
+							<h4>Law Advocacy</h4>
+							<p>Disability Law Advocacy activites and programs.</p>
 						</div>
 						<div class="col-xs-3 agile-why-text">
 							<div class="wthree_features_grid hvr-rectangle-out">
-								<i class="fa fa-heart-o" aria-hidden="true"></i>
+								<i class="fa fa-audio-description" aria-hidden="true"></i>
 							</div>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
 					<div class="wthree_agile_us">
 						<div class="col-xs-9 agile-why-text">
-							<h4>Crowns & Bridges</h4>
-							<p>Lorem ipsum magna, vehicula ut scelerisque ornare porta ete.</p>
+							<h4>Support on Legislative Activities</h4>
+							<p>DLEEP guides on neccessary activities that can promote easy legislative debates and lobbyig for the passage of the disability rights law.</p>
 						</div>
 						<div class="col-xs-3 agile-why-text">
 							<div class="wthree_features_grid hvr-rectangle-out">
-								<i class="fa fa-wheelchair" aria-hidden="true"></i>
+								<i class="fa fa-gavel" aria-hidden="true"></i>
 							</div>
 						</div>
 						<div class="clearfix"> </div>
@@ -481,12 +770,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="wthree_agile_us">
 					<div class="col-xs-3 agile-why-text">
 							<div class="wthree_features_grid hvr-rectangle-out">
-								<i class="fa fa-eyedropper" aria-hidden="true"></i>
+								<i class="fa fa-check" aria-hidden="true"></i>
 							</div>
 						</div>
 						<div class="col-xs-9 agile-why-text two">
-							<h4>DLEEP Project Implants</h4>
-							<p>Lorem ipsum magna, vehicula ut scelerisque ornare porta ete.</p>
+							<h4>Disability rights law assent</h4>
+							<p>DLEEP organises and advises on the best presentation and impactful modalities to provoke quicker assent to the Disability rights law at the executive arm.</p>
 						</div>
 
 						<div class="clearfix"> </div>
@@ -498,8 +787,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</div>
 						</div>
 						<div class="col-xs-9 agile-why-text two">
-							<h4>Sedation DLEEP Staffry</h4>
-							<p>Lorem ipsum magna, vehicula ut scelerisque ornare porta ete.</p>
+							<h4>Public Awareness Programs</h4>
+							<p>DLEEP provides platforms, media and organises activities to popularize and conscientize the
+                                public on the Disability rights law </p>
 						</div>
 
 						<div class="clearfix"> </div>
@@ -511,8 +801,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</div>
 						</div>
 						<div class="col-xs-9 agile-why-text two">
-							<h4>DLEEP Staffry</h4>
-							<p>Lorem ipsum magna, vehicula ut scelerisque ornare porta ete.</p>
+							<h4>Implementation kick offs</h4>
+							<p>DLEEP guides of best ways to kick off implementation strategies according to best practices.</p>
 						</div>
 
 						<div class="clearfix"> </div>
@@ -542,21 +832,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <li>
 
                         <div class="slider-info">
-                            <h3 class="">Professional DLEEP Project Services</h3>
-                            <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique vehicula porta. </p>
+                            <h3 class="">DLEEP breathes Disability rights law</h3>
+                            <p class="">Disability law enactment enforcement promotion DLEEP, is everything about Disability rights law
+                            . Providing experienced guidance and expertise on the formulation, legislations and implementations of Disability rights law
+                            in states and governments in governed societies</p>
                         </div>
                     </li>
                     <li>
                         <div class="slider-info">
-                            <h3 class="">We Provide Best Services</h3>
-                            <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique vehicula porta..</p>
+                            <h3 class="">We Provide Best Consultative services and support</h3>
+                            <p class="">DLEEP provides incubative and premium consultative services for civil societies and governmets
+                                as regards any stage towards the institution and implementation of the Disability rights law .</p>
                         </div>
                     </li>
                     <li>
 
                         <div class="slider-info">
-                            <h3 class="">Professional DLEEP Project Services</h3>
-                            <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique vehicula porta. </p>
+                            <h3 class="">Authentic Research Resources on the Disability Rights Law</h3>
+                            <p class="">Disability Law Enactment and Enforcement Promotion houses veritable resourceful materials that
+                                provides guided information on the Disability rights law. </p>
 
                         </div>
                     </li>
@@ -579,31 +873,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>
 <!--end main-->
 
+
 <!--team-->
+<?php
+$donorsArray = ['donation.*', 'users.id as userid', 'users.name as usersname', 'users.imageurl as usersimageurl'];
+$donors = DB::table('donation')->join('users', 'userid', '=', 'users.id')->select($donorsArray)
+    ->orderBy('donation.id','DESC')->paginate(16,$donorsArray);
+?>
+
 <div class="team" id="team">
    <div class="container">
-   <h3 class="w3l_head">Our DLEEP Staffs</h3>
-			<p class="w3ls_head_para">Meet Our Doctors</p>
+   <h3 class="w3l_head">Our DLEEP Donors</h3>
+			<p class="w3ls_head_para">Meet Recent Donors To DLEEP</p>
          <div class="w3l_team_grids">
-		 				<div class="col-md-3 w3l_team_grid">
-					<div class="view view-second">
-						<img src="{{ asset('myassets/images/t3.jpg') }}" alt=" " class="img-responsive">
-						<div class="mask"></div>
-						<div class="content">
-							<div class="w3l_social_icons w3l_social_icons1">
-								<ul>
-									<li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-									<li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-									<li><a href="#" class="google_plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
+             <?php foreach($donors as $d): ?>
 
-						</div>
-					</div>
-					<h4>Mic Waltainer</h4>
-					<p>DLEEP Staff</p>
-				</div>
-							<div class="col-md-3 w3l_team_grid">
+                 <div class="col-md-3 w3l_team_grid">
+                     <div class="view view-second">
+                         <img src="{{ asset($d->usersimageurl) }}" alt=" " class="img-responsive">
+                         <div class="mask"></div>
+                         <div class="content">
+                             <div class="w3l_social_icons w3l_social_icons1">
+                                 <ul>
+                                     <li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                     <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                     <li><a href="#" class="google_plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                 </ul>
+                             </div>
+
+                         </div>
+                     </div>
+                     <h4><?php echo($d->usersname); ?></h4>
+                     <p>DLEEP Donor: <?php echo($d->detail); ?></p>
+                 </div>
+
+             <?php endforeach; ?>
+             <div class="col-md-3 w3l_team_grid">
 					<div class="view view-second">
 						<img src="{{ asset('myassets/images/t4.jpg') }}" alt=" " class="img-responsive">
 						<div class="mask"></div>
@@ -664,193 +969,233 @@ License URL: http://creativecommons.org/licenses/by/3.0/
    </div>
 </div>
 <!--//team-->
-<!-- work -->
-	<div class="work" id="gallery">
-			<h3 class="w3l_head">Gallery</h3>
-			<p class="w3ls_head_para">View Our Works</p>
-			<div class="work-grids">
-				<div class="work-grid">
-					<a href="images/g1.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
-						<img src="{{ asset('myassets/images/g1.jpg') }}" alt="" class="img-responsive"/>
-						<div class="b-wrapper">
-							<h4 class="b-animate b-from-left    b-delay03 ">
-								<p>DLEEP Project</p>
-							</h4>
-						</div>
-					</a>
-				</div>
-				<div class="work-grid">
-					<a href="images/g2.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
-						<img src="{{ asset('myassets/images/g2.jpg') }}" alt="" class="img-responsive"/>
-						<div class="b-wrapper">
-							<h4 class="b-animate b-from-left    b-delay03 ">
-								<p>DLEEP Project</p>
-							</h4>
-						</div>
-					</a>
-				</div>
-				<div class="work-grid">
-					<a href="images/g8.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
-						<img src="{{ asset('myassets/images/g8.jpg') }}" alt="" class="img-responsive"/>
-						<div class="b-wrapper">
-							<h4 class="b-animate b-from-left    b-delay03 ">
-								<p>DLEEP Project</p>
-							</h4>
-						</div>
-					</a>
-				</div>
-				<div class="work-grid">
-					<a href="images/g3.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
-						<img src="{{ asset('myassets/images/g3.jpg') }}" alt="" class="img-responsive"/>
-						<div class="b-wrapper">
-							<h4 class="b-animate b-from-left    b-delay03 ">
-								<p>DLEEP Project</p>
-							</h4>
-						</div>
-					</a>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
+<?php
+    $galleryfilesArray = ['galleryfile.*'];
+    $galleryfiles = DB::table('galleryfile')->where(["resourcetype"=>1, "filetype"=>'image/jpeg'])->select($galleryfilesArray)
+                    ->orderBy('galleryfile.id','DESC')->paginate(16,$galleryfilesArray);
+?>
 
-			<div class="work-grids two">
-				<div class="work-grid">
-					<a href="images/g5.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
-						<img src="{{ asset('myassets/images/g5.jpg') }}" alt="" class="img-responsive"/>
-						<div class="b-wrapper">
-							<h4 class="b-animate b-from-left    b-delay03 ">
-								<p>DLEEP Project</p>
-							</h4>
-						</div>
-					</a>
-				</div>
-				<div class="work-grid">
-					<a href="images/g4.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
-						<img src="{{ asset('myassets/images/g4.jpg') }}" alt="" class="img-responsive"/>
-						<div class="b-wrapper">
-							<h4 class="b-animate b-from-left    b-delay03 ">
-								<p>DLEEP Project</p>
-							</h4>
-						</div>
-					</a>
-				</div>
-				<div class="work-grid">
-					<a href="images/g6.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
-						<img src="{{ asset('myassets/images/g6.jpg') }}" alt="" class="img-responsive"/>
-						<div class="b-wrapper">
-							<h4 class="b-animate b-from-left    b-delay03 ">
-								<p>DLEEP Project</p>
-							</h4>
-						</div>
-					</a>
-				</div>
-				<div class="work-grid">
-					<a href="images/g7.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
-						<img src="{{ asset('myassets/images/g7.jpg') }}" alt="" class="img-responsive"/>
-						<div class="b-wrapper">
-							<h4 class="b-animate b-from-left    b-delay03 ">
-								<p>DLEEP Project</p>
-							</h4>
-						</div>
-					</a>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
+<?php if(!(count($galleryfiles) >= 4)): ?>
 
-	</div>
-<!-- //work -->
+
+    <!-- work -->
+    <div class="work" id="gallery">
+        <h3 class="w3l_head">Gallery</h3>
+        <p class="w3ls_head_para">View Our Works</p>
+        <div class="work-grids">
+            <div class="work-grid">
+                <a href="images/g1.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                    <img src="{{ asset('myassets/images/g1.jpg') }}" alt="" class="img-responsive"/>
+                    <div class="b-wrapper">
+                        <h4 class="b-animate b-from-left    b-delay03 ">
+                            <p>DLEEP Project</p>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+            <div class="work-grid">
+                <a href="images/g2.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                    <img src="{{ asset('myassets/images/g2.jpg') }}" alt="" class="img-responsive"/>
+                    <div class="b-wrapper">
+                        <h4 class="b-animate b-from-left    b-delay03 ">
+                            <p>DLEEP Project</p>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+            <div class="work-grid">
+                <a href="images/g8.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                    <img src="{{ asset('myassets/images/g8.jpg') }}" alt="" class="img-responsive"/>
+                    <div class="b-wrapper">
+                        <h4 class="b-animate b-from-left    b-delay03 ">
+                            <p>DLEEP Project</p>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+            <div class="work-grid">
+                <a href="images/g3.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                    <img src="{{ asset('myassets/images/g3.jpg') }}" alt="" class="img-responsive"/>
+                    <div class="b-wrapper">
+                        <h4 class="b-animate b-from-left    b-delay03 ">
+                            <p>DLEEP Project</p>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+
+        <div class="work-grids two">
+            <div class="work-grid">
+                <a href="images/g5.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                    <img src="{{ asset('myassets/images/g5.jpg') }}" alt="" class="img-responsive"/>
+                    <div class="b-wrapper">
+                        <h4 class="b-animate b-from-left    b-delay03 ">
+                            <p>DLEEP Project</p>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+            <div class="work-grid">
+                <a href="images/g4.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                    <img src="{{ asset('myassets/images/g4.jpg') }}" alt="" class="img-responsive"/>
+                    <div class="b-wrapper">
+                        <h4 class="b-animate b-from-left    b-delay03 ">
+                            <p>DLEEP Project</p>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+            <div class="work-grid">
+                <a href="images/g6.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                    <img src="{{ asset('myassets/images/g6.jpg') }}" alt="" class="img-responsive"/>
+                    <div class="b-wrapper">
+                        <h4 class="b-animate b-from-left    b-delay03 ">
+                            <p>DLEEP Project</p>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+            <div class="work-grid">
+                <a href="images/g7.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                    <img src="{{ asset('myassets/images/g7.jpg') }}" alt="" class="img-responsive"/>
+                    <div class="b-wrapper">
+                        <h4 class="b-animate b-from-left    b-delay03 ">
+                            <p>DLEEP Project</p>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+
+    </div>
+    <!-- //work -->
+<?php else: ?>
+
+
+    <!-- work -->
+    <div class="work" id="gallery">
+        <h3 class="w3l_head">Gallery</h3>
+        <p class="w3ls_head_para">View Our Works</p>
+        <div class="work-grids">
+
+            <?php foreach($galleryfiles as $g): ?>
+
+                <div class="work-grid">
+                    <a href="{{ asset($g->fileurl) }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                        <img src="{{asset($g->fileurl) }}" alt="<?php echo($g->description)?>" class="img-responsive"/>
+                        <div class="b-wrapper">
+                            <h4 class="b-animate b-from-left    b-delay03 ">
+                                <p><?php echo($g->description); ?></p>
+                            </h4>
+                        </div>
+                    </a>
+                </div>
+
+            <?php endforeach; ?>
+            <div class="clearfix"> </div>
+        </div>
+        <?php if((count($galleryfiles) <= 5)): ?>
+
+            <div class="work-grids two">
+                <div class="work-grid">
+                    <a href="images/g5.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                        <img src="{{ asset('myassets/images/g5.jpg') }}" alt="" class="img-responsive"/>
+                        <div class="b-wrapper">
+                            <h4 class="b-animate b-from-left    b-delay03 ">
+                                <p>DLEEP Project</p>
+                            </h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="work-grid">
+                    <a href="images/g4.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                        <img src="{{ asset('myassets/images/g4.jpg') }}" alt="" class="img-responsive"/>
+                        <div class="b-wrapper">
+                            <h4 class="b-animate b-from-left    b-delay03 ">
+                                <p>DLEEP Project</p>
+                            </h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="work-grid">
+                    <a href="images/g6.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                        <img src="{{ asset('myassets/images/g6.jpg') }}" alt="" class="img-responsive"/>
+                        <div class="b-wrapper">
+                            <h4 class="b-animate b-from-left    b-delay03 ">
+                                <p>DLEEP Project</p>
+                            </h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="work-grid">
+                    <a href="images/g7.jpg') }}" class="b-link-stripe b-animate-go swipebox"  title="">
+                        <img src="{{ asset('myassets/images/g7.jpg') }}" alt="" class="img-responsive"/>
+                        <div class="b-wrapper">
+                            <h4 class="b-animate b-from-left    b-delay03 ">
+                                <p>DLEEP Project</p>
+                            </h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+
+        <?php endif; ?>
+
+    </div>
+
+    <div class="row">{{$galleryfiles->links() }}</div>
+    <!-- //work -->
+<?php endif; ?>
   <!--/news-->
-<!-- news -->
-	<div class="news">
-		<div class="container">
-			<h3 class="w3l_head">Latest News</h3>
-			<p class="w3ls_head_para">See Our News</p>
-			<div class="agileits_w3layouts_news_grids">
-				<ul id="flexiselDemo1">
-					<li>
-						<div class="news-grid">
-								<img src="{{ asset('myassets/images/g1.jpg') }}" alt="">
-								<div class="news-grid-info">
-									<h5><span>DLEEP Project</span> Pro</h5>
-									<h4>22.10.2016</h4>
-									<p>Etiam ex lorem cursus vitae placerat suscipit dapibus tortor sed nec augue</p>
-									<div class="article-links">
-										<ul>
-											<li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i><span>1,052</span></a></li>
-											<li><a href="#"><i class="glyphicon glyphicon-comment"></i><span>10K</span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-					</li>
-					<li>
-						<div class="news-grid">
-								<img src="{{ asset('myassets/images/g2.jpg') }}" alt="">
-								<div class="news-grid-info">
-									<h5><span>DLEEP Project</span> Pro </h5>
-									<h4>22.10.2016</h4>
-									<p>Etiam ex lorem cursus vitae placerat suscipit dapibus tortor sed nec augue</p>
-									<div class="article-links">
-										<ul>
-											<li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i><span>1,052</span></a></li>
-											<li><a href="#"><i class="glyphicon glyphicon-comment"></i><span>10K</span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-					</li>
-					<li>
-						<div class="news-grid">
-								<img src="{{ asset('myassets/images/g3.jpg') }}" alt="">
-								<div class="news-grid-info">
-									<h5><span>DLEEP Project</span> Pro </h5>
-									<h4>22.10.2016</h4>
-									<p>Etiam ex lorem cursus vitae placerat suscipit dapibus tortor sed nec augue</p>
-									<div class="article-links">
-										<ul>
-											<li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i><span>1,052</span></a></li>
-											<li><a href="#"><i class="glyphicon glyphicon-comment"></i><span>10K</span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-					</li>
-					<li>
-						<div class="news-grid">
-								<img src="{{ asset('myassets/images/g4.jpg') }}" alt="">
-								<div class="news-grid-info">
-									<h5><span>DLEEP Project</span> Pro </h5>
-									<h4>22.10.2016</h4>
-									<p>Etiam ex lorem cursus vitae placerat suscipit dapibus tortor sed nec augue</p>
-									<div class="article-links">
-										<ul>
-											<li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i><span>1,052</span></a></li>
-											<li><a href="#"><i class="glyphicon glyphicon-comment"></i><span>10K</span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-					</li>
-					<li>
-						<div class="news-grid">
-								<img src="{{ asset('myassets/images/g5.jpg') }}" alt="">
-								<div class="news-grid-info">
-									<h5><span>DLEEP Project</span> Pro </h5>
-								<h4>22.10.2016</h4>
-									<p>Etiam ex lorem cursus vitae placerat suscipit dapibus tortor sed nec augue</p>
-									<div class="article-links">
-										<ul>
-											<li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i><span>1,052</span></a></li>
-											<li><a href="#"><i class="glyphicon glyphicon-comment"></i><span>10K</span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-				</ul>
 
-			</div>
-		</div>
-	</div>
+<?php
+$articlearray = ['article.*', 'category.name as categoryname'];
+$articles = DB::table('article')->join('category','category.id','=','categoryid')
+    ->select($articlearray)
+    ->orderBy('article.id', 'DESC')->distinct()->paginate(12, $articlearray);
+?>
+
+<div class="news">
+    <div class="container">
+        <h3 class="w3l_head">Latest News</h3>
+        <p class="w3ls_head_para">See Our News</p>
+        <div class="agileits_w3layouts_news_grids">
+            <ul id="flexiselDemo1">
+
+                <?php foreach ($articles as $a): ?>
+                    <li>
+                        <div class="news-grid">
+                            <img src="{{ asset($a->imageurl) }}" alt="">
+                            <div class="news-grid-info">
+                                <h5><span><?php echo($a->title)?></span> <?php echo($a->categoryname); ?> </h5>
+                                <h4><?php echo($a->dateofpublication); ?></h4>
+                                <p><?php echo(substr($a->detail,70))?></p>
+                                <p><?php echo($a->detail); ?></p>
+                                <div class="article-links">
+                                    <ul>
+                                        <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i><span><?php echo($a->no_of_views); ?></span></a></li>
+                                        <li><a href="#"><i class="glyphicon glyphicon-comment"></i><span><?php echo($a->no_of_comments); ?></span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+
+
+            </ul>
+
+        </div>
+    </div>
+</div>
 <!-- //news -->
+
+
+
 
 <!-- updates-bottom -->
 	<div class="updates-bottom">
@@ -871,7 +1216,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="w3_updates_bottom_grid_right">
 					<p class="counter">652</p>
-					<h3>Awadrs</h3>
+					<h3>Awards</h3>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -881,7 +1226,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="w3_updates_bottom_grid_right">
 					<p class="counter">886</p>
-					<h3> Rooms</h3>
+					<h3> Success records</h3>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -948,15 +1293,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="w3agile_footer_grids">
 				<div class="col-md-4 w3agile_footer_grid">
 					<h3>About Us</h3>
-					<p>Duis aute irure dolor in reprehenderit in voluptate velit esse.<span>Excepteur sint occaecat cupidatat
-						non proident, sunt in culpa qui officia deserunt mollit.</span></p>
+					<p>
+                        Disability law enactment and enforcement promotion DLEEP, We are all about the
+                        Disability rights law: providing consultative services on formulation, legislative support and enactment of
+                        the disability rights law.
+					</p>
 				</div>
 
 				<div class="col-md-4 w3agile_footer_grid">
 					<h3>Contact Info</h3>
 					<ul>
-						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
-						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="contactto:info@example.com">info@example.com</a></li>
+						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Prof. Dora Akunyili Women Development Center, Along Enugu - Onitsha Express Way, Awka. Anambra State</span></li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="contactto:info@example.com">info@dislaw.org</a></li>
 						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
 					</ul>
 				</div>
@@ -965,7 +1313,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<ul>
 						<li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a class="scroll" href="#about">About</a></li>
 						<li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a class="scroll" href="#gallery">Gallery</a></li>
-						<li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a class="scroll" href="#team">DLEEP Staffs</a></li>
+						<li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a class="scroll" href="#team">DLEEP Donors</a></li>
 						<li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a class="scroll" href="#contact">contact</a></li>
 					</ul>
 				</div>
@@ -1008,6 +1356,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="{{asset('myassets2/assets/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('mdbootstrap/js/popper.min.js') }}" ></script>
 <script type="text/javascript" src="{{asset('mdbootstrap/js/bootstrap.min.js') }}" ></script>
+
 <script type="text/javascript" src="{{asset('mdbootstrap/js/mdb.min.js') }}" ></script>
 
 <!--scripts from dlc template-->
@@ -1148,5 +1497,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     });
 </script>
 <!-- //here ends scrolling icon -->
+
+
 </body>
 </html>

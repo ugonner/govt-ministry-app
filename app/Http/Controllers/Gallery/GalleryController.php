@@ -52,6 +52,8 @@ class GalleryController extends Controller
 
             //descriiption for each grouup
             $description = $request->input($label);
+            //resourcetype for each grouup
+            $resourcetype = $request->input('resourcetype'.$glabel);
 
             if($request->hasFile($fileinput_formname)){
                 $galleryfilescount = count($request->file($fileinput_formname));
@@ -64,7 +66,7 @@ class GalleryController extends Controller
                     }
                     $fileurl = Storage::url('images/galleryfiles/'.$filename);
                     $filetype = $request->file($fileinput_formname)[$i]->getClientMimeType();
-                    $fileobj = ['fileurl'=>$fileurl, 'filetype'=>$filetype, 'description'=>$description,"userid"=>$userid];
+                    $fileobj = ['fileurl'=>$fileurl, 'filetype'=>$filetype,"resourcetype"=>$resourcetype, 'description'=>$description,"userid"=>$userid];
                     $insertArray[]=$fileobj;
 
                 }

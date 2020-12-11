@@ -46,11 +46,9 @@
                         <img src="{{asset($af->fileurl)}}" class="img-fluid" />
                         @else
                         <button class="btn btn-block bg-transparent">{{$af->description}}</button>
-                        <form action="" method="post" class="">
-                            @csrf
-                            <input type="hidden" name="fileid" value="{{$af->id}}">
-                            <button type="submit" class="btn bg-transparent"><span class="material-icons">download</span> download</button>
-                        </form>
+                        <div>
+                            <button type="submit" class="btn bg-transparent"><a href="{{asset($af->fileurl)}}"><span class="material-icons">download</span></a> download</button>
+                        </div>
                         @endif
 
                         <form action="{{route('delete_gallery_file')}}" method="post"  class="">
@@ -81,7 +79,19 @@
 
                     <div class="form-group">
                         <label for="filedesc">Description</label>
-                        <input type="text" name="galleryfiles{{$i}}label" placeholder="Description of files" class="w-100 form-control form-control-lg" @error('galleryfiles{{$i}}label') id-valid @enderror />
+                        <input type="text" name="galleryfiles{{$i}}label" placeholder="Description of files" class="w-100 form-control form-control-lg" @error('galleryfiles{{$i}}label') is-valid @enderror />
+
+                        @error('galleryfiles{{$i}}label')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+
+                        <label for="fileresourcetype">Resource type</label>
+                        <select id="fileresourcetype" name="resourcetype{{$i}}"  class="w-100 form-control form-control-lg" @error('resourcetype{{$i}}') is-valid @enderror >
+                            <option value="1" selected>Gallery File</option>
+                            <option value="2">Research Resource</option>
+                        </select>
 
                         @error('galleryfiles{{$i}}label')
                                     <span class="invalid-feedback" role="alert">
